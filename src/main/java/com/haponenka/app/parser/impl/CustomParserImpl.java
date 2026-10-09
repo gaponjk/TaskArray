@@ -10,8 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class CustomParserImpl implements CustomParser {
 
   private static final Logger LOGGER = LogManager.getLogger(CustomParserImpl.class);
-  private static final String DELIMITER_REGEX = "[,;\\s]+";
-  private static final Pattern DELIMITER_PATTERN = Pattern.compile(DELIMITER_REGEX);
+  private static final Pattern DELIMITER_PATTERN = Pattern.compile("[,;\\s]+");
 
   private final ArrayLineValidator validator;
 
@@ -23,8 +22,8 @@ public class CustomParserImpl implements CustomParser {
   public int[] parseLineToIntArray(String line) throws CustomArrayException {
     boolean isValid = this.validator.isValid(line);
     if (isValid) {
-      String trimmedLine = line.trim();
-      String[] stringNumbers = DELIMITER_PATTERN.split(trimmedLine);
+      String strippedLine = line.strip();
+      String[] stringNumbers = DELIMITER_PATTERN.split(strippedLine);
       int length = stringNumbers.length;
       int[] numbers = new int[length];
       for (int i = 0; i < length; i++) {

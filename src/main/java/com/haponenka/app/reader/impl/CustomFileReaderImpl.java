@@ -12,14 +12,13 @@ import org.apache.logging.log4j.Logger;
 
 public class CustomFileReaderImpl implements CustomFileReader {
 
-  private static final Logger LOGGER = LogManager.getLogger(CustomFileReaderImpl.class);
+  private final static Logger LOGGER = LogManager.getLogger(CustomFileReaderImpl.class);
 
   @Override
   public List<String> readLines(String relativeFilePath) throws CustomArrayException {
     if (relativeFilePath != null && !relativeFilePath.isEmpty()) {
       Path path = Paths.get(relativeFilePath);
-      boolean fileExists = Files.exists(path);
-      if (fileExists) {
+      if (Files.exists(path)) {
         try {
           List<String> lines = Files.readAllLines(path);
           LOGGER.info("File successfully read: {}", relativeFilePath);
